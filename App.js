@@ -50,7 +50,7 @@ export default class App extends React.Component {
   };
 
   startTimer = () => {
-    this.interval = BackgroundTimer.setInterval(this.tick, 1000);
+    this.interval = setInterval(this.tick, 1000);
     this.setState({ pausedTimer: false });
   }
 
@@ -67,7 +67,7 @@ export default class App extends React.Component {
   }
 
   pauseTimer() {
-    BackgroundTimer.clearInterval(this.interval);
+    clearInterval(this.interval);
     this.setState({ pausedTimer: true });
   }
 
