@@ -17,7 +17,7 @@ export default class ExoItem extends React.Component {
     }
 
     display(){
-        this.props.showOn()
+        this.props.showTimer()
 
     }   
     sendTime(){

@@ -26,12 +26,11 @@ export default class App extends React.Component {
     }
   }
 
-  showOn() {
+  showTimer() {
     this.setState({
       isVisible: true
     })
   };
-
 
   startTimer = () =>{
 		this.interval = setInterval(this.tick,1000);
@@ -56,7 +55,7 @@ export default class App extends React.Component {
     this.setState({
       isVisible: false,
     })
-    clearInterval(this.state.timeResetTimer)
+    this.pauseTimer()
   }
 
   addNewTodo() {
@@ -132,7 +131,7 @@ export default class App extends React.Component {
                   style={styles.exo}
                   exerciceItem={item}
                   removeExercice={() => this.removeExercice(item)}
-                  showOn={() => this.showOn()}
+                  showTimer={() => this.showTimer()}
                   sendTime={() => this.sendTime(item)}
 
                 />

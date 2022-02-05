@@ -10,7 +10,6 @@ export default class TimerExercice extends React.Component {
         this.state = {
           //visible:this.props.visible,
           timerDuration: props.time,
-          touchable:false,
         };
       }
 
@@ -26,15 +25,6 @@ export default class TimerExercice extends React.Component {
         this.setState({visible:false})        
       }
 
-      /*componentDidMount() {
-        console.log("DidMount")
-        this.myInterval= setInterval(() =>{
-          this.setState({
-            timerDuration : this.state.timerDuration - 1
-          })
-        },1000);
-        
-      };*/
       StartPause(){
         if(this.props.pausedTimer){
           this.props.startTimer()
@@ -44,23 +34,20 @@ export default class TimerExercice extends React.Component {
           this.props.pauseTimer();
         }
           
-        
       }
       combinedCancel(){
-        this.state.touchable=false,
         this.props.cancel()
       }
 
       render() {
-       //const handleTimerComplete = () => alert('Custom Completion Function');
-       //const {timerDuration}=this.state
+
           return(
               
                 <Modal isVisible={this.props.visible} >
                     <View style={styles.timer}>
 
                         <View style={styles.timerContainer}>
-                          <TouchableOpacity onPress={() => this.StartPause()} disabled={this.state.touchable}>
+                          <TouchableOpacity onPress={() => this.StartPause()}>
                             <Text style={styles.timerText} >
                               {this.state.timerDuration}
                             </Text>
