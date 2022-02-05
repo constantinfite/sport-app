@@ -1,7 +1,6 @@
 import React from 'react';
-
 import { Platform, StyleSheet, Text, TextInput, View, Button, FlatList, Modal, ToolbarAndroidBase } from 'react-native';
-
+import { Audio } from 'expo-av';
 import ExoInput from './components/ExoInput'
 import ExoItem from './components/ExoItem'
 import TimerExercice from './components/TimerExercice'
@@ -21,9 +20,27 @@ export default class App extends React.Component {
       timeResetTimer: 0,
       pausedTimer: true,
       listExercices: [
-        { id: 0, name: 'Planche', nbRepetition: '10', nbSerie: '4', time: '5' }
+        { id: 0, name: 'Planche', nbRepetition: '10', nbSerie: '4', time: '60' }
       ]
     }
+  }
+
+  async componentDidMount(){
+    Audio.setAudioModeAsync({
+      allowsRecordingIOS: false,
+      playsInSilentMode : true ,
+      staysActiveInBackground : false
+
+    })
+    this.sound = new Audio.Sound();
+    const status = {
+      shouldPlay: false
+    }
+    this.sound.loadAsync(require('./assets/count-5to1.mp3'), status, false)
+  }
+
+  playSound(){
+    this.sound.playAsync()
   }
 
   showTimer() {
@@ -32,23 +49,26 @@ export default class App extends React.Component {
     })
   };
 
-  startTimer = () =>{
-		this.interval = setInterval(this.tick,1000);
-    this.setState({ pausedTimer : false });
-	}
+  startTimer = () => {
+    this.interval = BackgroundTimer.setInterval(this.tick, 1000);
+    this.setState({ pausedTimer: false });
+  }
 
   tick = () => {
-    if(this.state.timeSend < 1){
+    if (this.state.timeSend < 7) {
+      this.playSound()
+    }
+    if (this.state.timeSend < 1) {
       this.hideTimer()
     }
     else {
-      this.setState({ timeSend : this.state.timeSend - 1 });
+      this.setState({ timeSend: this.state.timeSend - 1 });
     }
   }
 
-  pauseTimer(){
-    clearInterval( this.interval );
-    this.setState({ pausedTimer : true });
+  pauseTimer() {
+    BackgroundTimer.clearInterval(this.interval);
+    this.setState({ pausedTimer: true });
   }
 
   hideTimer() {
