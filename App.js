@@ -1,146 +1,151 @@
 import React from 'react';
-import {Platform, StyleSheet, Text,TextInput, View, Button,FlatList,Modal, ToolbarAndroidBase} from 'react-native';
+
+import { Platform, StyleSheet, Text, TextInput, View, Button, FlatList, Modal, ToolbarAndroidBase } from 'react-native';
 
 import ExoInput from './components/ExoInput'
 import ExoItem from './components/ExoItem'
 import TimerExercice from './components/TimerExercice'
 
 export default class App extends React.Component {
-  
-  constructor(props){
+
+  constructor(props) {
     super(props);
-    this.state={
-      todoInput:'',
-      nbRepe:'',
-      nbSer:'',
-      timeRest:'',
-      isVisible:false,
-      visible:false,
-      test:'tttt',
-      timeSend:0,
-      timer:0,
-      intervalId:0,
-      
-      
-      listExercices:[
-        {id:0, name:'Planche', nbRepetition:'10', nbSerie:'4',time:'10'}
+    this.state = {
+      todoInput: '',
+      nbRepe: '',
+      nbSer: '',
+      timeRest: '',
+      isVisible: false,
+      visible: false,
+      timeSend: 0,
+      timeResetTimer: 0,
+      pausedTimer: true,
+      listExercices: [
+        { id: 0, name: 'Planche', nbRepetition: '10', nbSerie: '4', time: '5' }
       ]
     }
   }
 
-  showOn(){
-    //console.log(this.state.isVisible)
+  showOn() {
     this.setState({
-      isVisible:true,
-      test:'jesuispasséfdp'
+      isVisible: true
     })
   };
 
-  onStart(){
-    let intervalId= this.myInterval= setInterval(() =>{
-      //console.log(this.state.timeSend)
-      this.setState({
-        timeSend : this.state.timeSend - 1,
-        intervalId: intervalId
-      })
-    },1000);
 
+  startTimer = () =>{
+		this.interval = setInterval(this.tick,1000);
+    this.setState({ pausedTimer : false });
+	}
+
+  tick = () => {
+    if(this.state.timeSend < 1){
+      this.hideTimer()
+    }
+    else {
+      this.setState({ timeSend : this.state.timeSend - 1 });
+    }
   }
 
-  hide(){
+  pauseTimer(){
+    clearInterval( this.interval );
+    this.setState({ pausedTimer : true });
+  }
+
+  hideTimer() {
     this.setState({
-      isVisible:false,
+      isVisible: false,
     })
-    clearInterval(this.state.intervalId)
+    clearInterval(this.state.timeResetTimer)
   }
 
-  addNewTodo () {
+  addNewTodo() {
     let listExercices = this.state.listExercices
-    
+
     listExercices.push({
-      id: listExercices.length +1,
+      id: listExercices.length + 1,
       name: this.state.todoInput,
-      nbRepetition:this.state.nbRepe,
-      nbSerie:this.state.nbSer,
-      time:this.state.timeRest,
-      done:false
+      nbRepetition: this.state.nbRepe,
+      nbSerie: this.state.nbSer,
+      time: this.state.timeRest,
+      done: false
     });
 
     this.setState({
       listExercices,
-      todoInput:'',
-      nbRepe:'',
-      nbSer:'',
-      timeRest:''
+      todoInput: '',
+      nbRepe: '',
+      nbSer: '',
+      timeRest: ''
     });
   }
 
-  removeExercice(item){
-    let listExercices=this.state.listExercices
+  removeExercice(item) {
+    let listExercices = this.state.listExercices
     listExercices = listExercices.filter((listExercices) => listExercices.id !== item.id)
-    this.setState({listExercices})
+    this.setState({ listExercices })
   }
 
-  sendTime(item){
-    this.setState({timeSend:item.time})
-    
-    
+  sendTime(item) {
+    this.setState({ timeSend: item.time })
   }
-  
 
-  render(){
-    return(
+
+  render() {
+    return (
       <View style={styles.screen}>
 
-        <TimerExercice 
-        text={this.state.test}
-        style={styles.timer}
-        visible={this.state.isVisible}
-        cancel={()=> this.hide()}
-        time={this.state.timeSend}
-        onStart={() => this.onStart()}
-        />  
+        <TimerExercice
+          text={this.state.test}
+          style={styles.timer}
+          pausedTimer={this.state.pausedTimer}
+          visible={this.state.isVisible}
+          cancel={() => this.hideTimer()}
+          time={this.state.timeSend}
+          startTimer={() => this.startTimer()}
+          pauseTimer={() => this.pauseTimer()}
+        />
 
         <View style={styles.input}>
           <ExoInput
-          textChange={todoInput => this.setState({todoInput})}
-          textChange1={nbSer => this.setState({nbSer})}
-          textChange2={nbRepe => this.setState({nbRepe})}
-          textChange3={timeRest => this.setState({timeRest})}
-          addNewTodo={ () => this.addNewTodo()}
-          todoInput={this.state.todoInput}
-          nbRepe={this.state.nbRepe}
-          nbSer={this.state.nbSer}
-          timeRest={this.state.timeRest}
+            textChange={todoInput => this.setState({ todoInput })}
+            textChange1={nbSer => this.setState({ nbSer })}
+            textChange2={nbRepe => this.setState({ nbRepe })}
+            textChange3={timeRest => this.setState({ timeRest })}
+            addNewTodo={() => this.addNewTodo()}
+            todoInput={this.state.todoInput}
+            nbRepe={this.state.nbRepe}
+            nbSer={this.state.nbSer}
+            timeRest={this.state.timeRest}
           />
         </View>
-        
+
         <View style={styles.listContainer}>
           <FlatList
-          
-          style ={styles.list}
-          data={this.state.listExercices}
-          keyExtractor={(item,index)=> index.toString()}
-          renderItem ={ ({item})=> {
-              return(
-                <ExoItem  
-                style={styles.exo}
-                exerciceItem={item}
-                removeExercice={() => this.removeExercice(item)}
-                showOn={() => this.showOn()}
-                sendTime={() => this.sendTime(item)}
-                
+
+            style={styles.list}
+            data={this.state.listExercices}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => {
+              return (
+                <ExoItem
+                  style={styles.exo}
+                  exerciceItem={item}
+                  removeExercice={() => this.removeExercice(item)}
+                  showOn={() => this.showOn()}
+                  sendTime={() => this.sendTime(item)}
+
                 />
               )
             }}
-            />
+          />
         </View>
 
       </View>
 
     );
   };
-  };
+};
 
 
 const styles = StyleSheet.create({
@@ -149,30 +154,30 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-   
-    
+
+
   },
-  listContainer:{
-    flex:1,
+  listContainer: {
+    flex: 1,
     //backgroundColor:'green',
-    width:'80%'
+    width: '80%'
   },
-  input:{
-    flex:1,
+  input: {
+    flex: 1,
     justifyContent: 'center',
-    width:'80%',
-    marginVertical:20
+    width: '80%',
+    marginVertical: 20
   },
-  exo:{
-    
+  exo: {
+
   },
-  timer:{
-    flex:1,
-    
+  timer: {
+    flex: 1,
+
   },
-  text:{
-    fontSize:50,
+  text: {
+    fontSize: 50,
   },
-  
+
 
 });

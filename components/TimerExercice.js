@@ -35,9 +35,16 @@ export default class TimerExercice extends React.Component {
         },1000);
         
       };*/
-      combined(){
-        this.state.touchable=true,
-        this.props.onStart()
+      StartPause(){
+        if(this.props.pausedTimer){
+          this.props.startTimer()
+        }
+        else{
+          console.log("pause")
+          this.props.pauseTimer();
+        }
+          
+        
       }
       combinedCancel(){
         this.state.touchable=false,
@@ -53,7 +60,7 @@ export default class TimerExercice extends React.Component {
                     <View style={styles.timer}>
 
                         <View style={styles.timerContainer}>
-                          <TouchableOpacity onPress={() => this.combined()} disabled={this.state.touchable}>
+                          <TouchableOpacity onPress={() => this.StartPause()} disabled={this.state.touchable}>
                             <Text style={styles.timerText} >
                               {this.state.timerDuration}
                             </Text>
