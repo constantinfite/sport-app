@@ -20,7 +20,7 @@ export default class App extends React.Component {
       timeResetTimer: 0,
       pausedTimer: true,
       listExercices: [
-        { id: 0, name: 'Planche', nbRepetition: '10', nbSerie: '4', time: '7' }
+        //{ id: 0, name: 'Planche', nbRepetition: '10', nbSerie: '4', time: '60' }
       ]
     }
 
@@ -30,7 +30,7 @@ export default class App extends React.Component {
     Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
       playsInSilentMode: true,
-      staysActiveInBackground: false
+      //staysActiveInBackground: true
 
     })
     this.sound = new Audio.Sound();
