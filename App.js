@@ -20,28 +20,30 @@ export default class App extends React.Component {
       timeResetTimer: 0,
       pausedTimer: true,
       listExercices: [
-        { id: 0, name: 'Planche', nbRepetition: '10', nbSerie: '4', time: '60' }
+        { id: 0, name: 'Planche', nbRepetition: '10', nbSerie: '4', time: '7' }
       ]
     }
+
   }
 
-  async componentDidMount(){
+  async componentDidMount() {
     Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
-      playsInSilentMode : true ,
-      staysActiveInBackground : false
+      playsInSilentMode: true,
+      staysActiveInBackground: false
 
     })
     this.sound = new Audio.Sound();
-    const status = {
-      shouldPlay: false
-    }
-    this.sound.loadAsync(require('./assets/count-5to1.mp3'), status, false)
+
+    this.sound.loadAsync(require('./assets/count-5to1.mp3'), {shouldPlay: false}, false)
   }
 
-  playSound(){
-    this.sound.playAsync()
+  async playSound() {
+    
+    await this.sound.playAsync()
+    //await this.sound.unloadAsync()
   }
+
 
   showTimer() {
     this.setState({
@@ -55,11 +57,12 @@ export default class App extends React.Component {
   }
 
   tick = () => {
-    if (this.state.timeSend < 7) {
+    if (this.state.timeSend < 7 && this.state.timeSend > 5) {
       this.playSound()
     }
     if (this.state.timeSend < 1) {
       this.hideTimer()
+
     }
     else {
       this.setState({ timeSend: this.state.timeSend - 1 });
@@ -72,6 +75,8 @@ export default class App extends React.Component {
   }
 
   hideTimer() {
+    this.sound.unloadAsync()
+    this.sound.loadAsync(require('./assets/count-5to1.mp3'), {shouldPlay: false}, false)
     this.setState({
       isVisible: false,
     })
