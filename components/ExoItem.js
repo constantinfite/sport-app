@@ -40,7 +40,7 @@ export default class ExoItem extends React.Component {
                 <View style={styles.containerbutton}>
                    
                     <TouchableOpacity style={styles.item}>
-                        <Text style={{fontSize:30,}} >
+                        <Text style={styles.nameExercice} >
                             {exerciceItem.name}
                         </Text>
                     </TouchableOpacity>
@@ -74,7 +74,7 @@ export default class ExoItem extends React.Component {
 
                         < View style={styles.textContainer} >
                                 <Text>
-                                Nombre de série 
+                                Nombre de série  
                                 </Text>
                                 <Text>
                                 Nombre de rép 
@@ -113,16 +113,24 @@ const styles = StyleSheet.create({
         flex:1,
         flexDirection:'row',
     },
-
+    nameExercice:{
+        fontSize:30,
+        color: '#2d2a2c',
+    },
     item:{
         flex:1,
     },
 
     buttonRemoveText:{
-        //backgroundColor:'red',
-        flex:0.2,
-        fontSize:20,
-        color:'red'
+        color:'#f51845',
+        fontWeight:'bold',
+        borderColor: '#f51845',
+        textAlign: 'center',
+        fontSize: 15,
+        borderWidth: 3,
+        width: 30,
+        height: 30,
+        borderRadius: 30/2
     },
     buttonRemove:{
         alignItems:'center',
@@ -131,16 +139,16 @@ const styles = StyleSheet.create({
         flex:0.2
     },
     info:{
-        flex:1.1,
+        flex:1.5,
         flexDirection:"row",
     },
     bandeauInfo:{
         flex:1,
         flexDirection:'row',
         marginBottom: 20,
-        borderColor: "#2e2e2e",
-        borderWidth:2,
+        backgroundColor:'white',
         paddingVertical:5,
+        borderRadius:25
     
     },
     serieLeft:{
@@ -152,6 +160,7 @@ const styles = StyleSheet.create({
     serieLeftText:{
         fontSize: 50,
         color: '#3e99ff',
+        
     },
     containerVariable:{
         marginLeft:10,
@@ -159,12 +168,12 @@ const styles = StyleSheet.create({
         justifyContent:"space-around",
     },
     textVariable:{
-        fontSize:18,
-        color:'#063872',
+        fontSize:20,
+        color:'#2d2a2c',
     },
     textContainer:{
         justifyContent:"space-around",
-        paddingVertical:3,
+        paddingVertical:4,
     },
 
 });

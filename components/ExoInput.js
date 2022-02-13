@@ -16,14 +16,14 @@ export default class ExoInput extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          
+
         };
-      }
+    }
     render() {
 
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <Modal isVisible={this.props.visible}>
+                <Modal isVisible={this.props.visible} >
                     <View style={styles.container}>
 
                         <TextInput
@@ -57,11 +57,18 @@ export default class ExoInput extends React.Component {
                             keyboardType='numeric'
                             placeholderTextColor={'white'}
                         />
-                        <TouchableOpacity style={styles.addButton} onPress={this.props.addNewTodo}>
-                            <Text style={styles.addButtonText}>
-                                ADD
-                            </Text>
-                        </TouchableOpacity>
+                        <View style={styles.buttonContainer}>
+                            <TouchableOpacity onPress={this.props.addNewTodo}>
+                                <Text style={styles.addButtonText}>
+                                    +
+                                </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={this.props.closeInput}>
+                                <Text style={styles.closeButton}>
+                                    x
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
 
                     </View>
                 </Modal>
@@ -81,7 +88,7 @@ const styles = StyleSheet.create({
     input: {
         width: '60%',
         borderBottomColor: 'white',
-        color: 'white',
+        color: '#3e99ff',
         borderBottomWidth: 1,
         marginBottom: 20,
         paddingBottom: 10
@@ -89,21 +96,29 @@ const styles = StyleSheet.create({
 
     },
     buttonContainer: {
-        flexDirection: "row-reverse",
+        flexDirection: "row",
         justifyContent: 'space-between',
-        width: '40%'
+        width: '60%'
     },
-    addButton: {
-
+    closeButton: {
+        borderColor: '#f51845',
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 30,
+        borderWidth: 6,
+        width: 60,
+        height: 60,
+        borderRadius: 60/2
     },
     addButtonText: {
         color: 'white',
-
-        fontSize: 20,
-        padding: 10,
-        borderWidth: 3,
-        borderRadius: 20,
-        borderColor: 'white'
+        textAlign: 'center',
+        fontSize: 30,
+        borderWidth: 6,
+        borderColor: '#3e99ff',
+        width: 60,
+        height: 60,
+        borderRadius: 60/2
     }
 
 });

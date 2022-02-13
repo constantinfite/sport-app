@@ -49,6 +49,11 @@ export default class App extends React.Component {
       isVisibleInput: true
     })
   };
+  closeExoInput = () => {
+    this.setState({
+      isVisibleInput: false
+    })
+  };
 
   showTimer() {
     this.setState({
@@ -128,7 +133,7 @@ export default class App extends React.Component {
       <View style={styles.screen}>
         <TouchableOpacity onPress={this.showExoInput}>
           <Text style={styles.addButtonText}>
-            ADD Exercice
+            Ajouter Exercice
           </Text>
         </TouchableOpacity>
         <TimerExercice
@@ -154,6 +159,7 @@ export default class App extends React.Component {
             nbSer={this.state.nbSer}
             timeRest={this.state.timeRest}
             visible={this.state.isVisibleInput}
+            closeInput= {() => this.closeExoInput()}
           />
         </View>
 
@@ -188,7 +194,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#eeeded',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 20
@@ -214,13 +220,12 @@ const styles = StyleSheet.create({
     fontSize: 50,
   },
   addButtonText: {
-    color: '#555555',
-
+    color: '#2d2a2c',
     fontSize: 20,
     padding: 10,
     borderWidth: 3,
     borderRadius: 20,
-    borderColor: '#555555',
+    borderColor: '#3e99ff',
     marginVertical: 40
   }
 
