@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, StyleSheet, Text, TextInput, View, Button, FlatList, Modal, ToolbarAndroidBase } from 'react-native';
+import { Platform, StyleSheet, Text, TextInput, View, Button, FlatList, Modal, TouchableOpacity, ToolbarAndroidBase } from 'react-native';
 import { Audio } from 'expo-av';
 import ExoInput from './components/ExoInput'
 import ExoItem from './components/ExoItem'
@@ -19,8 +19,9 @@ export default class App extends React.Component {
       timeSend: 0,
       timeResetTimer: 0,
       pausedTimer: true,
+      isVisibleInput: false,
       listExercices: [
-        //{ id: 0, name: 'Planche', nbRepetition: '10', nbSerie: '4', time: '60' }
+        { id: 0, name: 'Planche', nbRepetition: '10', nbSerie: '4', time: '60' }
       ]
     }
 
@@ -35,15 +36,19 @@ export default class App extends React.Component {
     })
     this.sound = new Audio.Sound();
 
-    this.sound.loadAsync(require('./assets/count-5to1.mp3'), {shouldPlay: false}, false)
+    this.sound.loadAsync(require('./assets/count-5to1.mp3'), { shouldPlay: false }, false)
   }
 
   async playSound() {
-    
+
     await this.sound.playAsync()
     //await this.sound.unloadAsync()
   }
-
+  showExoInput = () => {
+    this.setState({
+      isVisibleInput: true
+    })
+  };
 
   showTimer() {
     this.setState({
@@ -76,7 +81,7 @@ export default class App extends React.Component {
 
   hideTimer() {
     this.sound.unloadAsync()
-    this.sound.loadAsync(require('./assets/count-5to1.mp3'), {shouldPlay: false}, false)
+    this.sound.loadAsync(require('./assets/count-5to1.mp3'), { shouldPlay: false }, false)
     this.setState({
       isVisible: false,
     })
@@ -102,6 +107,9 @@ export default class App extends React.Component {
       nbSer: '',
       timeRest: ''
     });
+    this.setState({
+      isVisibleInput: false
+    })
   }
 
   removeExercice(item) {
@@ -118,7 +126,11 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.screen}>
-
+        <TouchableOpacity onPress={this.showExoInput}>
+          <Text style={styles.addButtonText}>
+            ADD Exercice
+          </Text>
+        </TouchableOpacity>
         <TimerExercice
           text={this.state.test}
           style={styles.timer}
@@ -141,6 +153,7 @@ export default class App extends React.Component {
             nbRepe={this.state.nbRepe}
             nbSer={this.state.nbSer}
             timeRest={this.state.timeRest}
+            visible={this.state.isVisibleInput}
           />
         </View>
 
@@ -178,6 +191,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 20
 
 
   },
@@ -187,10 +201,7 @@ const styles = StyleSheet.create({
     width: '80%'
   },
   input: {
-    flex: 1,
-    justifyContent: 'center',
-    width: '80%',
-    marginVertical: 20
+    
   },
   exo: {
 
@@ -202,6 +213,16 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 50,
   },
+  addButtonText: {
+    color: '#555555',
+
+    fontSize: 20,
+    padding: 10,
+    borderWidth: 3,
+    borderRadius: 20,
+    borderColor: '#555555',
+    marginVertical: 40
+  }
 
 
 });
