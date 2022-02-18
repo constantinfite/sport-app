@@ -37,7 +37,7 @@ export default class ExoInput extends React.Component {
                             style={styles.input}
                             onChangeText={(nbSer) => this.props.textChange1(nbSer)}
                             value={this.props.nbSer}
-                            placeholder="Nombre de série"
+                            placeholder="number of sets"
                             keyboardType='numeric'
                             placeholderTextColor={'white'}
                         />
@@ -45,7 +45,7 @@ export default class ExoInput extends React.Component {
                             style={styles.input}
                             onChangeText={(nbRepe) => this.props.textChange2(nbRepe)}
                             value={this.props.nbRepe}
-                            placeholder="Nombre de répétition"
+                            placeholder="number of repetition"
                             keyboardType='numeric'
                             placeholderTextColor={'white'}
                         />
@@ -53,7 +53,7 @@ export default class ExoInput extends React.Component {
                             style={styles.input}
                             onChangeText={(timeRest) => this.props.textChange3(timeRest)}
                             value={this.props.timeRest}
-                            placeholder="Temps de récupération"
+                            placeholder="Rest time"
                             keyboardType='numeric'
                             placeholderTextColor={'white'}
                         />
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         borderColor: '#f51845',
         color: 'white',
         textAlign: 'center',
-        fontSize: 30,
+        fontSize: 40,
         borderWidth: 6,
         width: 60,
         height: 60,
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     addButtonText: {
         color: 'white',
         textAlign: 'center',
-        fontSize: 30,
+        fontSize: 40,
         borderWidth: 6,
         borderColor: '#3e99ff',
         width: 60,

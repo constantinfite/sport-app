@@ -74,13 +74,13 @@ export default class ExoItem extends React.Component {
 
                         < View style={styles.textContainer} >
                                 <Text>
-                                Nombre de série  
+                                Number of sets  
                                 </Text>
                                 <Text>
-                                Nombre de rép 
+                                Number of reps
                                 </Text>
                                 <Text>
-                                    Temps de repos 
+                                   rest time
                                 </Text>
                         </View>
 
@@ -126,13 +126,16 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         borderColor: '#f51845',
         textAlign: 'center',
-        fontSize: 15,
+        justifyContent: 'center',
+        fontSize: 20,
         borderWidth: 3,
         width: 30,
         height: 30,
         borderRadius: 30/2
     },
     buttonRemove:{
+        
+        textAlign: 'center',
         alignItems:'center',
         justifyContent:'center',
         

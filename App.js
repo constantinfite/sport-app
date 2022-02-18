@@ -133,7 +133,7 @@ export default class App extends React.Component {
       <View style={styles.screen}>
         <TouchableOpacity onPress={this.showExoInput}>
           <Text style={styles.addButtonText}>
-            Ajouter Exercice
+            Add exercice
           </Text>
         </TouchableOpacity>
         <TimerExercice
