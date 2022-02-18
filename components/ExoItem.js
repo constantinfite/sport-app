@@ -74,10 +74,10 @@ export default class ExoItem extends React.Component {
 
                         < View style={styles.textContainer} >
                                 <Text>
-                                Number of sets  
+                                number of sets  
                                 </Text>
                                 <Text>
-                                Number of reps
+                                number of reps
                                 </Text>
                                 <Text>
                                    rest time

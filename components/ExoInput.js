@@ -37,7 +37,7 @@ export default class ExoInput extends React.Component {
                             style={styles.input}
                             onChangeText={(nbSer) => this.props.textChange1(nbSer)}
                             value={this.props.nbSer}
-                            placeholder="number of sets"
+                            placeholder="Number of sets"
                             keyboardType='numeric'
                             placeholderTextColor={'white'}
                         />
@@ -45,7 +45,7 @@ export default class ExoInput extends React.Component {
                             style={styles.input}
                             onChangeText={(nbRepe) => this.props.textChange2(nbRepe)}
                             value={this.props.nbRepe}
-                            placeholder="number of repetition"
+                            placeholder="Number of repetition"
                             keyboardType='numeric'
                             placeholderTextColor={'white'}
                         />
