@@ -94,27 +94,34 @@ export default class App extends React.Component {
   }
 
   addNewTodo() {
-    let listExercices = this.state.listExercices
 
-    listExercices.push({
-      id: listExercices.length + 1,
-      name: this.state.todoInput,
-      nbRepetition: this.state.nbRepe,
-      nbSerie: this.state.nbSer,
-      time: this.state.timeRest,
-      done: false
-    });
+    if (this.state.todoInput && this.state.nbRepe && this.state.nbSer && this.state.timeRest) {
+      let listExercices = this.state.listExercices
 
-    this.setState({
-      listExercices,
-      todoInput: '',
-      nbRepe: '',
-      nbSer: '',
-      timeRest: ''
-    });
-    this.setState({
-      isVisibleInput: false
-    })
+      listExercices.push({
+        id: listExercices.length + 1,
+        name: this.state.todoInput,
+        nbRepetition: this.state.nbRepe,
+        nbSerie: this.state.nbSer,
+        time: this.state.timeRest,
+        done: false
+      });
+
+      this.setState({
+        listExercices,
+        todoInput: '',
+        nbRepe: '',
+        nbSer: '',
+        timeRest: ''
+      });
+      this.setState({
+        isVisibleInput: false
+      })
+    }
+    else {
+      console.log("empty")
+    }
+
   }
 
   removeExercice(item) {
@@ -159,7 +166,7 @@ export default class App extends React.Component {
             nbSer={this.state.nbSer}
             timeRest={this.state.timeRest}
             visible={this.state.isVisibleInput}
-            closeInput= {() => this.closeExoInput()}
+            closeInput={() => this.closeExoInput()}
           />
         </View>
 
@@ -197,7 +204,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#eeeded',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 20
+    paddingTop: 40
 
 
   },
@@ -207,7 +214,7 @@ const styles = StyleSheet.create({
     width: '80%'
   },
   input: {
-    
+
   },
   exo: {
 
@@ -221,9 +228,10 @@ const styles = StyleSheet.create({
   },
   addButtonText: {
     color: '#2d2a2c',
-    fontSize: 20,
+    fontSize: 25,
+    backgroundColor: 'white',
     padding: 10,
-    borderWidth: 3,
+    borderWidth: 2,
     borderRadius: 20,
     borderColor: '#3e99ff',
     marginVertical: 40

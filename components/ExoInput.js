@@ -58,7 +58,7 @@ export default class ExoInput extends React.Component {
                             placeholderTextColor={'white'}
                         />
                         <View style={styles.buttonContainer}>
-                            <TouchableOpacity onPress={this.props.addNewTodo}>
+                            <TouchableOpacity onPress={this.props.addNewTodo}  >
                                 <Text style={styles.addButtonText}>
                                     +
                                 </Text>

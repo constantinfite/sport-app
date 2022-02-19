@@ -161,8 +161,15 @@ const styles = StyleSheet.create({
        
     },
     serieLeftText:{
-        fontSize: 50,
+        fontSize: 40,
         color: '#3e99ff',
+        fontWeight:'bold',
+        borderColor: '#3e99ff',
+        textAlign: 'center',
+        borderWidth: 3,
+        width:60,
+        height: 60,
+        borderRadius: 20/2
         
     },
     containerVariable:{
