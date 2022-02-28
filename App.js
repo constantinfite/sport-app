@@ -20,8 +20,9 @@ export default class App extends React.Component {
       timeResetTimer: 0,
       pausedTimer: true,
       isVisibleInput: false,
+      timeMode:false,
       listExercices: [
-        { id: 0, name: 'Planche', nbRepetition: '10', nbSerie: '4', time: '60' }
+        { id: 0, name: 'Planche', nbRepetition: '10', nbSerie: '4', time: '60', timeMode: true }
       ]
     }
 
@@ -89,7 +90,7 @@ export default class App extends React.Component {
     this.sound.loadAsync(require('./assets/count-5to1.mp3'), { shouldPlay: false }, false)
     this.setState({
       isVisible: false,
-    })
+    }),
     this.pauseTimer()
   }
 
@@ -104,6 +105,7 @@ export default class App extends React.Component {
         nbRepetition: this.state.nbRepe,
         nbSerie: this.state.nbSer,
         time: this.state.timeRest,
+        timeMode : this.state.timeMode,
         done: false
       });
 
@@ -112,6 +114,7 @@ export default class App extends React.Component {
         todoInput: '',
         nbRepe: '',
         nbSer: '',
+        timeMode: false,
         timeRest: ''
       });
       this.setState({
@@ -133,6 +136,11 @@ export default class App extends React.Component {
   sendTime(item) {
     this.setState({ timeSend: item.time })
   }
+
+  toggleSwitch1 = (value) => {
+    this.setState({switch1Value: value})
+    console.log('Switch 1 is: ' + value)
+ }
 
 
   render() {
@@ -167,6 +175,9 @@ export default class App extends React.Component {
             timeRest={this.state.timeRest}
             visible={this.state.isVisibleInput}
             closeInput={() => this.closeExoInput()}
+            toggleSwitch1 = {timeMode  => this.setState({timeMode: timeMode})}
+            switch1Value = { this.state.timeMode}
+            
           />
         </View>
 

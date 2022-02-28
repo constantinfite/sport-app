@@ -23,7 +23,6 @@ export default class TimerExercice extends React.Component {
 
     }
   };
-  
 
 
   startPause() {

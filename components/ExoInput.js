@@ -8,7 +8,8 @@ import {
     Button,
     TouchableOpacity,
     TouchableWithoutFeedback,
-    Keyboard
+    Keyboard,
+    Switch
 } from 'react-native'
 
 export default class ExoInput extends React.Component {
@@ -16,15 +17,27 @@ export default class ExoInput extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            switch1Value: false,
+        }
 
-        };
+
     }
+
     render() {
 
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <Modal isVisible={this.props.visible} >
                     <View style={styles.container}>
+                        <View style={styles.switchContainer}>
+                            <Text style={styles.text}> Time mode </Text>
+                            <Switch
+                                onValueChange={this.props.toggleSwitch1}
+                                value={this.props.switch1Value}
+                                activeText={'On'}
+                                inActiveText={'Off'}
+                            />
+                        </View>
 
                         <TextInput
                             style={styles.input}
@@ -85,13 +98,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
 
     },
+    switchContainer: {
+        flexDirection: "row",
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+    },
     input: {
         width: '60%',
         borderBottomColor: 'white',
-        color: '#3e99ff',
+        color: 'white',
         borderBottomWidth: 1,
         marginBottom: 20,
-        paddingBottom: 10
+        paddingBottom: 10,
+        //fontWeight:'bold'
 
 
     },
@@ -108,7 +127,7 @@ const styles = StyleSheet.create({
         borderWidth: 6,
         width: 60,
         height: 60,
-        borderRadius: 60/2
+        borderRadius: 60 / 2
     },
     addButtonText: {
         color: 'white',
@@ -118,7 +137,15 @@ const styles = StyleSheet.create({
         borderColor: '#3e99ff',
         width: 60,
         height: 60,
-        borderRadius: 60/2
+        borderRadius: 60 / 2
+    },
+    text: {
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 20,
+        marginRight:30,
+        marginBottom: 20,
+        
     }
 
 });
